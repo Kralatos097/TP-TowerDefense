@@ -18,18 +18,28 @@ public class TowerScript : MonoBehaviour
         InvokeRepeating("Fire", 0, fireRate);
     }
 
+    private void Update()
+    {
+        
+    }
+
+    //Modifier pour passer par la List d'ennemies de EnnemyScript et calculer via distance et non via collider
     public void Fire()
     {
         if (inRangeEnnemies.Count != 0)
         {
             GameObject laser = Instantiate(laserPrefab);
-            laser.GetComponent<LineRenderer>().SetPosition(0, transform.position);
-            laser.GetComponent<LineRenderer>().SetPosition(1, inRangeEnnemies[0].transform.position);
-            
-            inRangeEnnemies[0].GetComponent<EnnemyScript>().PV--;
-            if (inRangeEnnemies[0].GetComponent<EnnemyScript>()._isDead)
+            if (inRangeEnnemies[0].GetComponent<EnnemyScript>() != null)
             {
-                inRangeEnnemies.Remove(inRangeEnnemies[0]);
+                laser.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+                laser.GetComponent<LineRenderer>().SetPosition(1, inRangeEnnemies[0].transform.position);
+
+            
+                inRangeEnnemies[0].GetComponent<EnnemyScript>().PV--;
+                if (inRangeEnnemies[0].GetComponent<EnnemyScript>()._isDead)
+                {
+                    inRangeEnnemies.Remove(inRangeEnnemies[0]);
+                }
             }
         }
     }
