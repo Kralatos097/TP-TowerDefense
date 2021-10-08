@@ -6,17 +6,13 @@ public class ObstacleScript : MonoBehaviour
 {
     public int speed;
     public float xDest;
+    public float zDest;
     public float waitTime = 2;
+    public int startXDirection = 1;
+    public int startZDirection = 1;
 
     private ObstacleState currentState = ObstacleState.Wait;
-    private int direction = 1;
     private bool finishWait = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -25,18 +21,22 @@ public class ObstacleScript : MonoBehaviour
         {
             case ObstacleState.Wait :
                 Invoke("stopWaiting", waitTime);
-                if (finishWait)
+                if(finishWait)
                 {
-                    direction *= -1;
+                    CancelInvoke();
+                    if(xDest >= 0) startXDirection *= -1;
+                    if(zDest >= 0) startZDirection *= -1;
                     currentState = ObstacleState.Mouving;
                     finishWait = false;
-                    CancelInvoke();
                 }
                 break;
             
             case ObstacleState.Mouving :
                 Move();
-                if (transform.position.x * direction >= xDest) currentState = ObstacleState.Wait;
+                if(transform.position.x * startXDirection >= xDest && transform.position.z * startZDirection >= zDest)
+                {
+                    currentState = ObstacleState.Wait;
+                }
                 break;
         }
     }
@@ -48,7 +48,14 @@ public class ObstacleScript : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
+        if (xDest >= 0)
+        {
+            transform.Translate(Vector3.right * startXDirection * speed * Time.deltaTime);
+        }
+        if (zDest >= 0)
+        {
+            transform.Translate(Vector3.forward * startZDirection * speed * Time.deltaTime);
+        }
     }
 }
 

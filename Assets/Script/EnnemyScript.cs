@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 
 namespace TPTowerDefense
@@ -26,7 +27,7 @@ namespace TPTowerDefense
             }
         }
 
-        private bool _isDead = false;
+        public bool _isDead = false;
         private bool IsDead
         {
             get => _isDead;
@@ -41,8 +42,10 @@ namespace TPTowerDefense
             }
         }
 
+        //private NavMeshPath path;
+
         public Transform objectif;
-        
+
         public static List<EnnemyScript> EnnemyList;
 
         void Awake()
@@ -56,10 +59,42 @@ namespace TPTowerDefense
 
         private void Start()
         {
-            objectif = GameObject.FindWithTag("Base").transform;
+            //objectif = GameObject.FindWithTag("Base").transform;
+            /*path = new NavMeshPath();
+            float distOE = 10000;
+            float dist;
+            foreach (BaseScript b in BaseScript.Bases)
+            {
+                bool a = NavMesh.CalculatePath(transform.position, b.transform.position, NavMesh.AllAreas, path);
+                Debug.Log("hhhhhhhhh "+a);
+                if(a)
+                {
+                    Transform objectifTemp = b.transform;
+                    GetComponent<NavMeshAgent>().destination = objectifTemp.position;
+                    dist = GetComponent<NavMeshAgent>().remainingDistance;
+                    
+                    if (dist < distOE)
+                    {
+                        
+                        distOE = dist;
+                        objectif = objectifTemp;
+                    }
+                }
+            }*/
+
+            /*if (objectif == null)
+            {
+                objectif = BaseScript.Bases[0].transform;
+            }*/
+            int index = Random.Range(0,BaseScript.Bases.Count);
+            objectif = BaseScript.Bases[index].transform;
+        }
+
+        private void Update()
+        {
             deplacement();
         }
-        
+
         private void OnDestroy()
         {
             EnnemyList.Remove(this);

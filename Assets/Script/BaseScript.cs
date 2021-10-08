@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class BaseScript : MonoBehaviour
     public TextMeshProUGUI PVUI;
 
     public Material mat;
+
+    public static List<BaseScript> Bases;
 
     private int _PV = 5;
     private int _MaxPV;
@@ -44,6 +47,15 @@ public class BaseScript : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (Bases == null)
+        {
+            Bases = new List<BaseScript>();
+        }
+        Bases.Add(this);
+    }
+
     private void Start()
     {
         _MaxPV = _PV;
@@ -63,5 +75,10 @@ public class BaseScript : MonoBehaviour
         {
             PV--;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Bases.Remove(this);
     }
 }

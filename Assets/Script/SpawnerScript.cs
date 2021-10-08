@@ -23,6 +23,6 @@ public class SpawnerScript : MonoBehaviour
 
     private void SpawnEnnemy()
     {
-        Instantiate(EnnemyPrefab);
+        Instantiate(EnnemyPrefab,transform.position, Quaternion.identity);
     }
 }
