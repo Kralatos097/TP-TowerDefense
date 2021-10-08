@@ -22,7 +22,6 @@ namespace TPTowerDefense
                 {
                     _PV = 0;
                     IsDead = true;
-                    return;
                 }
             }
         }
@@ -57,7 +56,7 @@ namespace TPTowerDefense
 
         private void Start()
         {
-            //objectif = GameObject.FindWithTag("Base").transform;
+            objectif = GameObject.FindWithTag("Base").transform;
             deplacement();
         }
         
@@ -68,7 +67,7 @@ namespace TPTowerDefense
 
         public void deplacement()
         {
-            gameObject.GetComponent<NavMeshAgent>().destination = StaticValues.BaseCoord;
+            gameObject.GetComponent<NavMeshAgent>().destination = objectif.position;
         }
 
         private void OnTriggerEnter(Collider other)

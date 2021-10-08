@@ -48,7 +48,6 @@ public class BaseScript : MonoBehaviour
     {
         _MaxPV = _PV;
         PVUI.text = _PV + " / " + _MaxPV;
-        StaticValues.BaseCoord = transform.position;
 
         mat.color = Color.green;
     }
