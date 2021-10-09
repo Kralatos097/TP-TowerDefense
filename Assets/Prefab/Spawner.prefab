@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnnemyPrefab: {fileID: 1504961567451459135, guid: f4acabcb1afb91d40868974fdbd3c0c4, type: 3}
-  SpawnTime: 1
-  SpawnFreq: 3
+  spawnTime: 2
+  spawnFreq: 5
+  spawnFreqMin: 0.5
+  spawnFreqReduc: 0.8
 --- !u!33 &4511359949662833221
 MeshFilter:
   m_ObjectHideFlags: 0

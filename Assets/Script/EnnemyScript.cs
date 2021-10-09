@@ -27,8 +27,8 @@ namespace TPTowerDefense
             }
         }
 
-        public bool _isDead = false;
-        private bool IsDead
+        private bool _isDead = false;
+        public bool IsDead
         {
             get => _isDead;
 

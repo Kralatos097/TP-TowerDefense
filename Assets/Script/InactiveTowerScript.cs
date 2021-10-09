@@ -16,7 +16,9 @@ public class InactiveTowerScript : MonoBehaviour
     public Material overMat;
     public Material actMat;
 
-    private void OnMouseOver()
+    private int _buyCost = MoneyScript.MonneyPTower;
+
+    private void OnMouseEnter()
     {
         graphMat.material = overMat;
     }
@@ -28,10 +30,12 @@ public class InactiveTowerScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        gameObject.GetComponent<TowerScript>().enabled = true;
-        Range.radius = towerRange;
+        if (MoneyScript.LooseMonney(_buyCost))
+        {
+            gameObject.GetComponent<TowerScript>().isActive = true;
 
-        Destroy(this);
+            Destroy(this);
+        }
     }
 
     private void OnDestroy()
