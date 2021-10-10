@@ -16,7 +16,15 @@ public class InactiveTowerScript : MonoBehaviour
     public Material overMat;
     public Material actMat;
 
+    public AudioClip clip;
+
     private int _buyCost = MoneyScript.MonneyPTower;
+    private AudioSource _source;
+
+    private void Start()
+    {
+        _source = GetComponent<AudioSource>();
+    }
 
     private void OnMouseEnter()
     {
@@ -33,6 +41,8 @@ public class InactiveTowerScript : MonoBehaviour
         if (MoneyScript.LooseMonney(_buyCost))
         {
             gameObject.GetComponent<TowerScript>().isActive = true;
+            _source.clip = clip;
+            _source.Play();
 
             Destroy(this);
         }

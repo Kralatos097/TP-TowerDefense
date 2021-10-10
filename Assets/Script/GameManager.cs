@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
 
     private void TimerEnded()
     {
-        Debug.Log("Timer Ended !");
-
         foreach (EnnemyScript ennemy in EnnemyScript.EnnemyList)
         {
             Destroy(ennemy.gameObject);

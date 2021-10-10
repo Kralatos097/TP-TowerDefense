@@ -150,3 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectif: {fileID: 0}
+  clip: {fileID: 8300000, guid: 45ca6f2c77a48994ca07a06985045631, type: 3}

@@ -37,6 +37,7 @@ namespace TPTowerDefense
                 _isDead = value;
                 if (_isDead)
                 {
+                    
                     Destroy(gameObject);
                 }
             }
@@ -47,6 +48,8 @@ namespace TPTowerDefense
         public Transform objectif;
 
         public static List<EnnemyScript> EnnemyList;
+        
+        public AudioClip clip;
 
         void Awake()
         {
@@ -97,6 +100,7 @@ namespace TPTowerDefense
 
         private void OnDestroy()
         {
+            AudioSource.PlayClipAtPoint(clip, transform.position, 5);
             EnnemyList.Remove(this);
         }
 

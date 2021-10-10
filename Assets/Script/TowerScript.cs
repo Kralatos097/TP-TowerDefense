@@ -26,6 +26,8 @@ public class TowerScript : MonoBehaviour
 
     private EnnemyScript target;
 
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +88,8 @@ public class TowerScript : MonoBehaviour
         laser.GetComponent<LineRenderer>().SetPosition(0, transform.position);
         laser.GetComponent<LineRenderer>().SetPosition(1, target.transform.position);
 
+        AudioSource.PlayClipAtPoint(clip, transform.position, 0.5f);
+        
         target.PV--;
 
         if(target.IsDead)
